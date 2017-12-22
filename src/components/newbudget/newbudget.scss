@@ -1,0 +1,84 @@
+newbudget {
+	.title {
+		position: relative;
+		background-color: $purple;
+		border-left: 5px solid $green;
+		font-size: 16px;
+		padding: 5px;
+		color: white;
+		width: 150px;
+		left: 10%;
+		box-shadow: $box-shadow;
+	}
+
+	.special-margin {
+		margin: 0px 0px 10px 0px;
+	}
+
+	.container {
+		width: 80%;
+		margin: 0 auto;
+		padding: 20px 0px;
+		background-color: white;
+		height: auot;
+		border: $border;
+		box-shadow: $box-shadow;
+	}
+
+	.z1 {
+		position: relative;
+		z-index: 100;
+	}
+
+	.z2 {
+		position: relative;
+		z-index: 50;
+	}
+
+	.input-container {
+		width: 80%;
+		margin: 0 auto;
+	}
+
+	input[type="number"] {
+		text-align: center;
+		border: none;
+		border-bottom: 1px solid $green;
+		font-size: 24px;
+		width: 80%;
+		color: $green;
+	}
+
+	.dollarSize {
+		font-size: 24px;
+		color: $green;
+		font-family: $font;
+	}
+
+	input[type="date"] {
+		position: relative;
+		left: 10%;
+		text-align: right;
+		width: auto;
+		margin: 0px auto 10px auto;
+		color: $green;
+		font-size: 16px;
+		border: none;
+		border-bottom: 1px solid $green;
+	}
+
+	.green {
+		text-align: center;
+		color: $green;
+		font-size: 24px;
+	}
+
+	.icon {
+		width: 25px;
+		margin: 0 auto;
+	}
+
+	button {
+		margin: 10px auto 0px auto;
+	}
+}

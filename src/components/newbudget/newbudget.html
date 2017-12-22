@@ -1,0 +1,28 @@
+<div class="title special-margin">
+	<span>Some Questions</span>
+</div>
+
+<div class="container">
+	<div class="title z2">
+		<span>Your Budget:</span>
+	</div>
+	<div class="container z1">
+		<div class="input-container">
+			<span class="dollarSize">$</span><input type="number">			
+		</div>
+	</div>
+	<br>
+	<div class="title z2">
+		<span>To Last Until:</span>
+	</div>
+	<div class="container z1">
+		<input type="date">
+		<br>
+		<div class="icon">
+			<ion-icon class="green" name="arrow-down"></ion-icon>
+		</div>
+		<br>
+		<input type="date">
+	</div>
+	<button (click)="submit()">Ready to Save</button>
+</div>

@@ -1,0 +1,17 @@
+page-new-budget {
+
+	ion-content {
+		background-image: $background;
+		background-size: 100%, 100%;
+	}
+
+	logo {
+		position: relative;
+		top: 5vh;
+	}
+
+	newbudget {
+		position: relative;
+		top: 7vh;
+	}
+}

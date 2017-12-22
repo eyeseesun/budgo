@@ -1,0 +1,17 @@
+start-container {
+
+	.container {
+		position: relative;
+		margin: 60px auto;
+		width: 250px;
+		height: auto;
+
+		background-color: white;
+		border: $border;
+		box-shadow: $box-shadow;
+	}
+
+	button {
+		margin: 25px 0px 25px 60px;
+	}
+}
