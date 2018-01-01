@@ -24,21 +24,67 @@ $background: url('../../assets/background.png');
 $box-shadow: 4px 4px rgba(0,0,0,0.1);
 $border: 1px solid #dfe0f4;
 
-button {
-		display: block;
-		background-color: $green;
-		
-		padding: 5px;
-		height: 25px;
+.btn-style {
+	display: block;
+	background-color: $green;
+	
+	padding: 7px 5px;
+	height: 30px;
 
-		font-family: $font;
-		font-size: 16px;
-		letter-spacing: 2px;
-		color: white;
+	font-family: $font;
+	font-size: 16px;
+	letter-spacing: 2px;
+	color: white;
 
-		border-left: 5px solid $purple;
-		box-shadow: 4px 4px rgba(0,0,0,0.1);
-	}
+	border-left: 5px solid $purple;
+	box-shadow: 4px 4px rgba(0,0,0,0.1);
+}
+
+.inline {
+	position: relative;
+	left: 10%;
+}
+
+.title {
+	display: inline-block;
+	position: relative;
+	background-color: $purple;
+	border-left: 5px solid $green;
+	font-size: 16px;
+	padding: 5px 8px 5px 5px;
+	color: white;
+	box-shadow: $box-shadow;
+}
+
+.title-inverse {
+	display: inline-block;
+	position: relative;
+	background-color: $green;
+	border-left: 5px solid $purple;
+	font-size: 16px;
+	padding: 5px 8px 5px 5px;
+	color: white;
+	box-shadow: $box-shadow;
+}
+
+.box {
+	padding: 5px 0px;
+	background-color: white;
+	height: auto;
+	border: $border;
+	box-shadow: $box-shadow;
+}
+
+.z1 {
+	position: relative;
+	z-index: 100;
+}
+
+.z2 {
+	position: relative;
+	z-index: 50;
+}
+
 
 /* Hides the scrollbar without removing ability to scroll */
 
@@ -58,4 +104,14 @@ div::-webkit-scrollbar-thumb {
   border: none;
   width: 0;
   background: rgba(0, 0, 0, 0);
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+/* Webkit browsers like Safari and Chrome */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

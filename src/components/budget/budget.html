@@ -1,0 +1,50 @@
+<div class="title-container">
+	<strong class="day">{{ day }}</strong>
+	<span class="date">{{ date }}</span>
+</div>
+<div class="container">
+	<div class="title inline z2">Today's Budget</div>
+	<div class="dailybudget-container center z1">
+		<div class="small">
+			<strong class="purple">${{ amountOrig | number: '1.2-2' }}</strong>
+			<strong class="red">-</strong>
+			<strong class="red">${{ spendUpdate | number: '1.2-2' }}</strong>
+			<strong class="red">-</strong>
+			<strong class="green">${{ bankUpdate | number: '1.2-2' }}</strong>
+		</div>
+		
+
+		<strong class="green big">=</strong><strong class="purple big">${{ amount | number: '1.2-2'}}</strong>
+	</div>
+
+	<br>
+
+	<div class="inline">
+		<span class="title-inverse z2">Spend</span>
+		<div class="title inactive z2">Bank</div>
+	</div>
+	<div class="dailybudget-container z1">
+		<span class="green small left-align">Transaction:</span>
+		<div class="line"></div>
+		<div class="inputs">
+				<ion-label stacked>Name:</ion-label>
+				<input type="text">
+				<ion-label stacked>Cost:</ion-label>
+				<input type="number" [(ngModel)]="spend">
+		</div>	
+		<div class="row">
+			<div class="col">
+				<button class="btn-style">History</button>
+			</div>
+			<div class="col">
+				<button class="btn-style" (click)="spendMoney()">Spend</button>
+			</div>
+		</div>		
+	<!--<div class="col">
+		<p class="strong purple small">Bank:</p>
+		<input type="number" [(ngModel)]="bank" #b="ngModel">
+		<button class="btn-style" (click)="bankMoney()" [disabled]="b.value > amount">Bank</button>
+	</div>
+		<p class="red" *ngIf="b.value > amount">You can't bank more than you have available</p>-->
+	</div>
+</div>

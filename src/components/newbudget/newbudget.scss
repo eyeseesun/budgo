@@ -1,15 +1,4 @@
 newbudget {
-	.title {
-		position: relative;
-		background-color: $purple;
-		border-left: 5px solid $green;
-		font-size: 16px;
-		padding: 5px;
-		color: white;
-		width: 150px;
-		left: 10%;
-		box-shadow: $box-shadow;
-	}
 
 	.special-margin {
 		margin: 0px 0px 10px 0px;
@@ -18,23 +7,25 @@ newbudget {
 	.container {
 		width: 80%;
 		margin: 0 auto;
-		padding: 20px 0px;
+		padding: 5px 0px;
 		background-color: white;
-		height: auot;
+		height: auto;
 		border: $border;
 		box-shadow: $box-shadow;
 	}
 
-	.z1 {
-		position: relative;
-		z-index: 100;
+	.label {
+		float: left;
 	}
 
-	.z2 {
-		position: relative;
-		z-index: 50;
+	.money {
+		float: right;
 	}
 
+	.errors {
+		margin: 10px 0px 5px 0px;
+	}
+	
 	.input-container {
 		width: 80%;
 		margin: 0 auto;
@@ -60,7 +51,6 @@ newbudget {
 		left: 10%;
 		text-align: right;
 		width: auto;
-		margin: 0px auto 10px auto;
 		color: $green;
 		font-size: 16px;
 		border: none;
@@ -72,13 +62,30 @@ newbudget {
 		color: $green;
 		font-size: 24px;
 	}
+	.red {
+		text-align: center;
+		color: $red;
+		font-size: 12px;
+		margin: 5px auto;
+	}
 
 	.icon {
 		width: 25px;
 		margin: 0 auto;
 	}
 
-	button {
-		margin: 10px auto 0px auto;
+	.btn-style {
+		margin: 20px auto 20px auto;
+	}
+
+	ion-item {
+		border: none;
+	}
+
+	.datetime-text {
+		background-color: $green;
+		border-radius: 15px;
+		padding: 5px 10px;
+		color: white;
 	}
 }

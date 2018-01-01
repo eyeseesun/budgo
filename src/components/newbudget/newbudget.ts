@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { BudgetPage } from '../../pages/budget/budget';
+import { BudgetProvider } from '../../providers/budget/budget';
+import { Budget } from '../../interfaces/budget.interface';
 
 /**
  * Generated class for the NewbudgetComponent component.
@@ -12,8 +16,66 @@ import { Component } from '@angular/core';
 })
 export class NewbudgetComponent {
 
-	constructor() {
+	money: number = 0;
+	startDate: string;
+	endDate: string;
+	currentDate: string;
+	budget: Array<number> = [];
+	dailyBudget: Array<Budget> = [];
+
+	constructor(private _nc: NavController, private _bp: BudgetProvider) {
+		this.startDate = new Date().toISOString();
+		let e1 = new Date().toISOString();
+		let e2 = Date.parse(e1) + (7 * (1000*3600*24));
+		this.endDate = new Date(e2).toISOString();
+
+		this.currentDate = new Date().toISOString();
+	}
+
+	submit(){
+		let dailyAmount = this.money / this.daysBetween(this.startDate, this.endDate);
+		let startAmount = dailyAmount;
+		let daysBetween = this.daysBetween(this.startDate, this.endDate);
 		
+		for(let i = 0; i < daysBetween; i++){
+			let r = Math.random() * dailyAmount;
+			let leftOver = dailyAmount - parseFloat(r.toFixed(2));
+			dailyAmount = startAmount + parseFloat(leftOver.toFixed(2));
+			this.budget.push(parseFloat(r.toFixed(2)));
+		}
+
+		let leftOver = this.money - parseFloat(this.sumAll(this.budget));
+		let divided = leftOver / daysBetween;
+
+		for(let i = 0; i < this.budget.length; i++){
+			this.budget[i] += divided;
+		}
+
+		let budgetObj: Budget;
+
+		for(let i = 0; i < this.budget.length; i++){
+			budgetObj = {
+				date: new Date(Date.parse(this.startDate) + (i * (1000*3600*24))).toISOString(),
+				amount: parseFloat(this.budget[i].toFixed(2))
+			}
+			this.dailyBudget.push(budgetObj);
+		}
+
+		this._bp.setBudget(this.dailyBudget);
+
+		this._nc.push(BudgetPage);
+	}
+
+	daysBetween(date1String, date2String){
+	  return Math.floor((Date.parse(date2String)-Date.parse(date1String))/(1000*3600*24));
+	}
+
+	sumAll(arr: Array<number>){
+		let sum = 0;
+		for(let i = 0; i < arr.length; i++){
+			sum += arr[i];
+		}
+		return sum.toFixed(2);
 	}
 
 }
