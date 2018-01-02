@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { BudgetProvider } from '../../providers/budget/budget';
+import { Budget } from '../../interfaces/budget.interface';
 
 /**
  * Generated class for the BudgetPage page.
@@ -15,11 +17,31 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class BudgetPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+	budget: Array<Budget>;
+	style: Object = {
+		'left': '0%'
+	};
+	currentView: number = 0;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad BudgetPage');
-  }
+	constructor(public navCtrl: NavController, public navParams: NavParams, private _bp: BudgetProvider) {
+		this.budget = _bp.getBudget();
+	}
+
+	left(){
+		if(this.currentView < this.budget.length){
+			this.currentView++;
+			this.style['left'] = '-' + this.currentView + '0' + this.currentView + '%';
+		}
+		console.log(this.style);
+	}
+
+	right(){
+		if(this.currentView !== 0){
+			this.currentView--;
+			this.style['left'] = '-' + this.currentView + '0' + this.currentView + '%';
+		}
+		console.log(this.style);
+
+	}
 
 }

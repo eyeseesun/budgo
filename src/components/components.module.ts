@@ -7,7 +7,9 @@ import { NewbudgetComponent } from './newbudget/newbudget';
 import { HomeBtnComponent } from './home-btn/home-btn';
 import { InfoBtnComponent } from './info-btn/info-btn';
 import { BudgetComponent } from './budget/budget';
-import { SpendModalComponent } from './spend-modal/spend-modal';
+import { BankModalComponent } from './bank-modal/bank-modal';
+import { HistoryModalComponent } from './history-modal/history-modal';
+import { NavFabComponent } from './nav-fab/nav-fab';
 @NgModule({
 	declarations: [TopbarComponent,
     LogoComponent,
@@ -17,7 +19,9 @@ import { SpendModalComponent } from './spend-modal/spend-modal';
     HomeBtnComponent,
     InfoBtnComponent,
     BudgetComponent,
-    SpendModalComponent],
+    BankModalComponent,
+    HistoryModalComponent,
+    NavFabComponent],
 	imports: [],
 	exports: [TopbarComponent,
     LogoComponent,
@@ -27,6 +31,8 @@ import { SpendModalComponent } from './spend-modal/spend-modal';
     HomeBtnComponent,
     InfoBtnComponent,
     BudgetComponent,
-    SpendModalComponent]
+    BankModalComponent,
+    HistoryModalComponent,
+    NavFabComponent]
 })
 export class ComponentsModule {}

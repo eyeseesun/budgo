@@ -1,4 +1,7 @@
 <ion-content>
 	<topbar></topbar>
-	<budget></budget>
+	<div class="nowrap" [ngStyle]="style">
+		<budget *ngFor="let b of budget; let i = index" [bID]="i" (swipeLeft)="left()" (swipeRight)="right()"></budget>
+	</div>
+	<nav-fab></nav-fab>
 </ion-content>

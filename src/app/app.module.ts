@@ -15,6 +15,10 @@ import { StartContainerComponent } from '../components/start-container/start-con
 import { CreatorComponent } from '../components/creator/creator';
 import { NewbudgetComponent } from '../components/newbudget/newbudget';
 import { BudgetComponent } from '../components/budget/budget';
+import { InfoBtnComponent } from '../components/info-btn/info-btn';
+import { BankModalComponent } from '../components/bank-modal/bank-modal';
+import { HistoryModalComponent } from '../components/history-modal/history-modal';
+import { NavFabComponent } from '../components/nav-fab/nav-fab';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -34,7 +38,11 @@ import { IonicStorageModule } from '@ionic/storage';
     StartContainerComponent,
     CreatorComponent,
     NewbudgetComponent,
-    BudgetComponent
+    BudgetComponent,
+    InfoBtnComponent,
+    BankModalComponent,
+    HistoryModalComponent,
+    NavFabComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +61,11 @@ import { IonicStorageModule } from '@ionic/storage';
     StartContainerComponent,
     CreatorComponent,
     NewbudgetComponent,
-    BudgetComponent
+    BudgetComponent,
+    InfoBtnComponent,
+    BankModalComponent,
+    HistoryModalComponent,
+    NavFabComponent
   ],
   providers: [
     StatusBar,

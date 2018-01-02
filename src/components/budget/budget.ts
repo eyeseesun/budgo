@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BudgetProvider } from '../../providers/budget/budget';
 import { Budget } from '../../interfaces/budget.interface';
 
@@ -14,6 +14,8 @@ import { Budget } from '../../interfaces/budget.interface';
 })
 export class BudgetComponent {
 
+	@Input() bID: number;
+
 	budget: Array<Budget> = [];
 	date: string;
 	amount: number;
@@ -27,10 +29,14 @@ export class BudgetComponent {
 	playing = false;
 
 	constructor(private _bp: BudgetProvider) {
+		
+	}
+
+	ngOnInit(){
 		this.budget = this._bp.getBudget();
 
-		let date = new Date(this.budget[0].date);
-		this.amount = this.budget[0].amount;
+		let date = new Date(this.budget[this.bID].date);
+		this.amount = this.budget[this.bID].amount;
 		this.amountOrig = this.amount;
 
 		let options = {
@@ -39,7 +45,10 @@ export class BudgetComponent {
 		};
 
 		this.date = date.toLocaleDateString("en-us", options);
-		this.day = this.budget[0].date.substring(8, 10);
+		this.day = this.budget[this.bID].date.substring(8, 10);
+
+
+		console.log(this.bID);
 	}
 
 	spendMoney(){
@@ -53,6 +62,5 @@ export class BudgetComponent {
 		this.bankUpdate += this.bank;
 		this.bank = 0;
 	}
-
 
 }
