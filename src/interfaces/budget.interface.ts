@@ -1,4 +1,8 @@
+import { Spend } from './spend.interface';
+
 export interface Budget {
 	date: string,
-	amount: number
+	amount: number,
+	spent: Array<Spend>,
+	bank: number
 }

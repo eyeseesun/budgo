@@ -4,6 +4,8 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { NgFor, NgClass, NgIf, NgStyle } from '@angular/common';
 import { NgModel } from '@angular/forms';
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 
 import { HomePage } from '../pages/home/home';
 import { NewBudgetPage } from '../pages/new-budget/new-budget';
@@ -22,6 +24,7 @@ import { NavFabComponent } from '../components/nav-fab/nav-fab';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Keyboard } from '@ionic-native/keyboard';
 import { BudgetProvider } from '../providers/budget/budget';
 
 import { HttpModule } from '@angular/http';
@@ -47,7 +50,7 @@ import { IonicStorageModule } from '@ionic/storage';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp, {}, { links: [] }),
+    IonicModule.forRoot(MyApp, { scrollPadding: false, scrollAssist: false, autoFocusAssist: false }, { links: [] }),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],

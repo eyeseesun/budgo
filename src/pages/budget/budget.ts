@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 import { BudgetProvider } from '../../providers/budget/budget';
 import { Budget } from '../../interfaces/budget.interface';
 
@@ -16,7 +16,6 @@ import { Budget } from '../../interfaces/budget.interface';
   templateUrl: 'budget.html',
 })
 export class BudgetPage {
-
 	budget: Array<Budget>;
 	style: Object = {
 		'left': '0%'

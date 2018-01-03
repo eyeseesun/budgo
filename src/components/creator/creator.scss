@@ -1,8 +1,10 @@
 creator {
 	.container {
 		position: relative;
-		right: -125px;
-		width: 225px;
+		top: 20vh;
+		float: right;
+		width: auto;
+		white-space: nowrap;
 		height: auto;
 		color: white;
 		font-size: 12px;

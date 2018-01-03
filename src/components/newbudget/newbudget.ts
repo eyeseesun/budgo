@@ -56,7 +56,9 @@ export class NewbudgetComponent {
 		for(let i = 0; i < this.budget.length; i++){
 			budgetObj = {
 				date: new Date(Date.parse(this.startDate) + (i * (1000*3600*24))).toISOString(),
-				amount: parseFloat(this.budget[i].toFixed(2))
+				amount: parseFloat(this.budget[i].toFixed(2)),
+				spent: [],
+				bank: 0
 			}
 			this.dailyBudget.push(budgetObj);
 		}

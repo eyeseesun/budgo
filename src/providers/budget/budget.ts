@@ -13,7 +13,7 @@ import { Budget } from '../../interfaces/budget.interface';
 @Injectable()
 export class BudgetProvider {
 
-	budget: Array<Budget>;	
+	budget: Array<Budget>;
 
 	constructor(public http: Http, private _storage: Storage) {
 		_storage.get('budget').then((val) => {
