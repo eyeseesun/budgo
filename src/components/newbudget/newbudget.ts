@@ -24,18 +24,23 @@ export class NewbudgetComponent {
 	dailyBudget: Array<Budget> = [];
 
 	constructor(private _nc: NavController, private _bp: BudgetProvider) {
-		this.startDate = new Date().toISOString();
-		let e1 = new Date().toISOString();
-		let e2 = Date.parse(e1) + (7 * (1000*3600*24));
-		this.endDate = new Date(e2).toISOString();
 
-		this.currentDate = new Date().toISOString();
+		let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+
+		this.startDate = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
+		let e1 = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
+		let e2 = Date.parse(e1) + (7 * (1000*3600*24));
+		this.endDate = new Date(e2 - tzoffset).toISOString();
+
+		this.currentDate = this.startDate;
 	}
 
 	submit(){
+		let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+
 		let dailyAmount = this.money / this.daysBetween(this.startDate, this.endDate);
 		let startAmount = dailyAmount;
-		let daysBetween = this.daysBetween(this.startDate, this.endDate);
+		let daysBetween = this.daysBetween(this.startDate, this.endDate) + 1;
 		
 		for(let i = 0; i < daysBetween; i++){
 			let r = Math.random() * dailyAmount;
@@ -55,7 +60,7 @@ export class NewbudgetComponent {
 
 		for(let i = 0; i < this.budget.length; i++){
 			budgetObj = {
-				date: new Date(Date.parse(this.startDate) + (i * (1000*3600*24))).toISOString(),
+				date: new Date(Date.parse(this.startDate) - tzoffset + (i * (1000*3600*24))).toISOString(),
 				amount: parseFloat(this.budget[i].toFixed(2)),
 				spent: [],
 				bank: 0

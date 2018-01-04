@@ -1,3 +1,20 @@
 history-modal {
+	.price {
+		width: 30%;
+		height: 100%;
+		font-size: 24px;
+	}
 
+	ion-card {
+		font-family: $font;
+	}
+
+	ion-label {
+		padding: 0px 0px 0px 10px;
+		margin-right: 0 !important;
+	}
+
+	.right {
+		float: right;
+	}
 }

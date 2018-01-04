@@ -1,3 +1,24 @@
-<div class="overlay">
-	<div class="modal"></div>
-</div>
+<ion-content class="overlay">
+	<ion-card *ngFor="let budget of budgets; let i = index">
+		<ion-card-header class="purple-bg"><strong class="white">{{ convertDate(budget.date) }}</strong></ion-card-header>					
+			<ion-list>
+				<ion-item *ngIf="budget.spent.length <= 0">
+					<ion-icon name="cash" class="green"></ion-icon>
+					<strong class="purple"> No Transactions This Day!</strong>
+				</ion-item>
+				<ion-item *ngFor="let spent of budget.spent; let j = index">
+					<div *ngIf="budget.spent.length > 0">
+						<strong class="price purple">
+							${{spent.amount}} 
+						</strong>
+						<strong class="green">
+							{{ spent.transName }}
+						</strong>fdsa
+						<button ion-button class="right red-bg" (click)="refund(i, j)">
+							Refund
+						</button>
+					</div>
+			    </ion-item>
+			</ion-list>
+	</ion-card>
+</ion-content>

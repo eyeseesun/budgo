@@ -19,7 +19,7 @@ export class MyApp {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public keyboard: Keyboard) {
      platform.ready().then(() => {
       // Here I'm using the keyboard class from ionic native.
-      keyboard.disableScroll(true);
+      keyboard.disableScroll(false);
       statusBar.styleDefault();
     });
   }
@@ -40,8 +40,6 @@ export class MyApp {
   }
 
   ionViewWillLeave() {
-    this.platform.ready().then(() => {
-    this.keyboard.disableScroll(false);
-  });
+    
 }
 }

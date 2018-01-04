@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Events } from 'ionic-angular';
 import { NewBudgetPage } from '../../pages/new-budget/new-budget';
 import { BudgetPage } from '../../pages/budget/budget';
+import { BudgetProvider } from '../../providers/budget/budget';
 
 /**
  * Generated class for the StartContainerComponent component.
@@ -15,10 +16,16 @@ import { BudgetPage } from '../../pages/budget/budget';
 })
 export class StartContainerComponent {
 
-	currentBudget: boolean = false;
+	currentBudget: boolean = true;
 
-	constructor(private _nc: NavController) {
+	constructor(private _nc: NavController, private _bp: BudgetProvider, private events: Events) {
 		
+	}
+
+	ngOnInit(){
+		this.events.subscribe('CurrentBudget', ()=>{
+			this.currentBudget = false;
+		});
 	}
 
 	goToCurrentBudget(){

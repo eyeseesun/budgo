@@ -23,11 +23,6 @@ export class NavFabComponent {
 		this._nc.popToRoot();
 	}
 
-	info(){
-		let infoModal = this._mc.create(InfoBtnComponent);
-		infoModal.present();
-	}
-
 	history(){
 		let historyModal = this._mc.create(HistoryModalComponent);
 		historyModal.present();

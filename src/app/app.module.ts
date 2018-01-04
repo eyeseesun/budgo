@@ -50,7 +50,7 @@ import { IonicStorageModule } from '@ionic/storage';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp, { scrollPadding: false, scrollAssist: false, autoFocusAssist: false }, { links: [] }),
+    IonicModule.forRoot(MyApp, {}, { links: [] }),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -74,7 +74,8 @@ import { IonicStorageModule } from '@ionic/storage';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    BudgetProvider
+    BudgetProvider,
+    Keyboard
   ]
 })
 export class AppModule { }

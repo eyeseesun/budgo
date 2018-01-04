@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { BudgetProvider } from '../../providers/budget/budget';
 import { Budget } from '../../interfaces/budget.interface';
+import { Events } from 'ionic-angular';
 
 /**
  * Generated class for the BudgetComponent component.
@@ -15,6 +16,8 @@ import { Budget } from '../../interfaces/budget.interface';
 export class BudgetComponent {
 
 	@Input() bID: number;
+
+	breakingStyle: Object;
 
 	budget: Array<Budget> = [];
 	date: string;
@@ -31,11 +34,29 @@ export class BudgetComponent {
 	playing = false;
 	active: Array<boolean> = [true, false];
 
-	constructor(private _bp: BudgetProvider) {
+	constructor(private _bp: BudgetProvider, private events: Events) {
 		
 	}
 
 	ngOnInit(){
+		this.events.subscribe('BudgetChanged' + this.bID, ()=>{
+			this.budget = this._bp.getBudget();
+
+			this.spendUpdate = 0;
+			this.spend = 0;
+			this.bank = 0;
+			this.bankUpdate = 0;
+			this.amount = this.budget[this.bID].amount;
+			this.amountOrig = this.amount;
+			this.bankUpdate = this.budget[this.bID].bank;
+
+			for(let i = 0; i < this.budget[this.bID].spent.length; i++){
+				this.spendUpdate += this.budget[this.bID].spent[i]['amount'];
+			}
+
+			this.amount -= this.spendUpdate;
+			this.amount -= this.bankUpdate;
+		});
 		this.budget = this._bp.getBudget();
 
 		let date = new Date(this.budget[this.bID].date);
@@ -57,6 +78,11 @@ export class BudgetComponent {
 
 		this.date = date.toLocaleDateString("en-us", options);
 		this.day = this.budget[this.bID].date.substring(8, 10);
+
+
+		this.breakingStyle = {
+			'height': (window.innerHeight * .8) + 'px'
+		};
 	}
 
 	spendMoney(){
@@ -70,8 +96,6 @@ export class BudgetComponent {
 		console.log(this.budget[this.bID].bank);
 
 		this._bp.setBudget(this.budget);
-
-		console.log(this.budget[this.bID].bank);
 
 
 		this.spend = 0;

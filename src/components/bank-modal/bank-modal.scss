@@ -1,3 +1,32 @@
 bank-modal {
+	.circle {
+		display: block;
+		margin: 45px auto;
+		height: 200px;
+		width: 200px;
+		border-radius: 100%;
+		font-size: 44px;
+		font-family: $font;
+		text-align: center;
+		padding: 68px 0px;
+		box-shadow: $box-shadow;
+	}
 
+	.center {
+		text-align: center;
+	}
+
+	.big {
+		font-size: 36px;
+		text-decoration: underline;
+	}
+
+	.center-btn {
+		margin: 35px auto;
+		display: block;
+	}
+
+	.col {
+		padding: 0px 10px !important;
+	}
 }

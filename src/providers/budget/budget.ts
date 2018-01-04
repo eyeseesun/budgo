@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 import { Budget } from '../../interfaces/budget.interface';
+import { Events } from 'ionic-angular';
 
 /*
   Generated class for the BudgetProvider provider.
@@ -14,11 +15,13 @@ import { Budget } from '../../interfaces/budget.interface';
 export class BudgetProvider {
 
 	budget: Array<Budget>;
+	activeBudget: number = 0;
 
-	constructor(public http: Http, private _storage: Storage) {
+	constructor(public http: Http, private _storage: Storage, private events: Events) {
 		_storage.get('budget').then((val) => {
 			if(val){
 				this.budget = val;
+				this.events.publish('CurrentBudget', true);
 			}
 		});
 	}
@@ -30,6 +33,14 @@ export class BudgetProvider {
 
 	getBudget(){
 		return this.budget;
+	}
+
+	setActiveBudget(id: number){
+		this.activeBudget = id;
+	}
+
+	getActiveBudget(){
+		return this.activeBudget;
 	}
 
 }

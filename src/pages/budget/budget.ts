@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, Events } from 'ionic-angular';
 import { BudgetProvider } from '../../providers/budget/budget';
 import { Budget } from '../../interfaces/budget.interface';
 
@@ -16,13 +16,14 @@ import { Budget } from '../../interfaces/budget.interface';
   templateUrl: 'budget.html',
 })
 export class BudgetPage {
+	@ViewChild(Slides) slides: Slides;
 	budget: Array<Budget>;
 	style: Object = {
 		'left': '0%'
 	};
 	currentView: number = 0;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private _bp: BudgetProvider) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, private _bp: BudgetProvider, private events: Events) {
 		this.budget = _bp.getBudget();
 	}
 
@@ -41,6 +42,10 @@ export class BudgetPage {
 		}
 		console.log(this.style);
 
+	}
+
+	slideChanged(){
+		this._bp.setActiveBudget(this.slides.getActiveIndex());
 	}
 
 }
