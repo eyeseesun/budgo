@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BudgetProvider } from '../../providers/budget/budget';
 import { Budget } from '../../interfaces/budget.interface';
-import { Events } from 'ionic-angular';
+import { Events, ViewController } from 'ionic-angular';
 
 /**
  * Generated class for the HistoryModalComponent component.
@@ -17,7 +17,7 @@ export class HistoryModalComponent {
 
 	budgets: Array<Budget>;
 
-	constructor(private _bp: BudgetProvider, private events: Events) {
+	constructor(private _bp: BudgetProvider, private events: Events, private _vc: ViewController) {
 		this.budgets = _bp.getBudget();
 	}
 
@@ -33,6 +33,10 @@ export class HistoryModalComponent {
 		  "July", "August", "September", "October", "November", "December"
 		];
 		return (new Date(date).getDate()) + " " + (monthNames[new Date(date).getMonth()]) + " " + (new Date(date).getFullYear());
+	}
+
+	exit(){
+		this._vc.dismiss();
 	}
 
 }

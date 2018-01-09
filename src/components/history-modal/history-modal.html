@@ -1,4 +1,7 @@
 <ion-content class="overlay">
+	<header>
+		<button class="white red-bg back-btn" (click)="exit()">back</button>
+	Spending History</header>
 	<ion-card *ngFor="let budget of budgets; let i = index">
 		<ion-card-header class="purple-bg"><strong class="white">{{ convertDate(budget.date) }}</strong></ion-card-header>					
 			<ion-list>

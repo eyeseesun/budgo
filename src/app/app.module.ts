@@ -21,10 +21,10 @@ import { InfoBtnComponent } from '../components/info-btn/info-btn';
 import { BankModalComponent } from '../components/bank-modal/bank-modal';
 import { HistoryModalComponent } from '../components/history-modal/history-modal';
 import { NavFabComponent } from '../components/nav-fab/nav-fab';
+import { HomeBtnComponent } from '../components/home-btn/home-btn';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Keyboard } from '@ionic-native/keyboard';
 import { BudgetProvider } from '../providers/budget/budget';
 
 import { HttpModule } from '@angular/http';
@@ -45,7 +45,8 @@ import { IonicStorageModule } from '@ionic/storage';
     InfoBtnComponent,
     BankModalComponent,
     HistoryModalComponent,
-    NavFabComponent
+    NavFabComponent,
+    HomeBtnComponent
   ],
   imports: [
     BrowserModule,
@@ -68,14 +69,14 @@ import { IonicStorageModule } from '@ionic/storage';
     InfoBtnComponent,
     BankModalComponent,
     HistoryModalComponent,
-    NavFabComponent
+    NavFabComponent,
+    HomeBtnComponent
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    BudgetProvider,
-    Keyboard
+    BudgetProvider
   ]
 })
 export class AppModule { }

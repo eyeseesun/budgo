@@ -78,11 +78,6 @@ export class BudgetComponent {
 
 		this.date = date.toLocaleDateString("en-us", options);
 		this.day = this.budget[this.bID].date.substring(8, 10);
-
-
-		this.breakingStyle = {
-			'height': (window.innerHeight * .8) + 'px'
-		};
 	}
 
 	spendMoney(){

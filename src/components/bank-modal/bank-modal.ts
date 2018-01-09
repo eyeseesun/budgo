@@ -32,7 +32,7 @@ export class BankModalComponent {
 		this._nc.pop();
 	}
 
-	withdraw(){
+	withdrawAll(){
 		for(let i = 0; i < this.budget.length; i++){
 			if(this.budget[i].bank > 0){
 				this.budget[i].amount -= this.budget[i].bank;

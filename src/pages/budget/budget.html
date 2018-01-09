@@ -1,6 +1,6 @@
 <ion-content>
 	<topbar></topbar>
-	<ion-slides (ionSlideDidChange)="slideChanged()" [ngStyle]="style">
+	<ion-slides [centeredSlides]="true" [effect]="fade" (ionSlideDidChange)="slideChanged()" [ngStyle]="style">
 		<ion-slide *ngFor="let b of budget; let i = index">
 			<budget [bID]="i" ></budget>
 		</ion-slide>

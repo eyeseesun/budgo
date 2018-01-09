@@ -1,9 +1,9 @@
-<div class="budget-container">
+<div class="wrapper">
 	<div class="title-container">
 		<strong class="day">{{ day }}</strong>
 		<span class="date">{{ date }}</span>
 	</div>
-	<div class="container" [ngStyle]="breakingStyle">
+	<div class="container">
 		<div class="title z2 inline">Today's Budget</div>
 		<div class="dailybudget-container center z1">
 			<div class="small">
@@ -17,14 +17,11 @@
 
 			<strong [ngClass]="{'med2': amount < -9.99 && amount > -99.99, 'med': amount < -99.99 }" class="green big">=</strong><strong [ngClass]="{'med2': amount < -9.99 && amount > -99.99, 'med': amount < -99.99 }" class="purple big">${{ amount | number: '1.2-2'}}</strong>
 		</div>
-
-		<br>
-
-		<div class="inline">
+		<div class="inline break">
 			<span class="z2" [ngClass]="{'inactive': !active[0], 'title': !active[0], 'title-inverse': active[0]}" (click)="activateTab(0)">Spend</span>
 			<div class="z2" [ngClass]="{'inactive': !active[1], 'title': !active[1], 'title-inverse': active[1]}" (click)="activateTab(1)">Bank</div>
 		</div>
-		<div class="dailybudget-container what-height z1">
+		<div class="dailybudget-container z1">
 			<div *ngIf="active[0]">
 				<span class="green small left-align">Transaction:</span>
 				<div class="line"></div>

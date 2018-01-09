@@ -6,6 +6,8 @@ history-modal {
 	}
 
 	ion-card {
+		position: relative;
+		top: 10vh;
 		font-family: $font;
 	}
 
@@ -16,5 +18,28 @@ history-modal {
 
 	.right {
 		float: right;
+	}
+
+	header {
+		position: fixed;
+		background-color: $purple;
+		box-shadow: $box-shadow;
+		font-family: $font;
+		font-size: 22px;
+		padding: 15px;
+		color: white;
+		border-left: 5px solid $green;
+		z-index: 9999;
+		width: 100%;
+	}
+
+	.back-btn {
+		position: absolute;
+		top: 17px;
+		right: 3vw;
+		padding: 5px;
+		border-radius: 5px;
+		box-shadow: $box-shadow;
+		float: left;
 	}
 }

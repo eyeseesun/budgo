@@ -1,13 +1,22 @@
 budget {
 
+	.wrapper {
+		display: table-cell;
+		vertical-align: middle;
+	}
+
 	.title-container {
-		width: 80%;
+		width: 80vw;
 		background-color: $purple;
-		margin: 5vh auto 0px auto;
+		margin: 0 auto;
 		padding: 10px;
 		box-shadow: $box-shadow;
 		color: white;
 		font-family: $font;
+	}
+
+	.break {
+		margin-top: 20px;
 	}
 
 	.inputs{
@@ -65,7 +74,8 @@ budget {
 		background-color: white;
 		box-shadow: $box-shadow;
 		border: $border;
-		width: 80%;
+		width: 80vw;
+		height: 450px;
 		margin: 0 auto;
 		padding: 20px 0;
 	}
@@ -138,5 +148,25 @@ budget {
 
 	.col {
 		padding: 0px;
+	}
+
+	@media(min-width: 600px){
+		.container {
+			width: 40vw;
+		}
+
+		.title-container {
+			width: 40vw;
+		}
+	}
+
+	@media(min-width: 900px){
+		.container {
+			width: 30vw;
+		}
+
+		.title-container {
+			width: 30vw;
+		}
 	}
 }

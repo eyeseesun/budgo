@@ -17,6 +17,7 @@ bank-modal {
 	}
 
 	.big {
+		font-family: $font;
 		font-size: 36px;
 		text-decoration: underline;
 	}
@@ -29,4 +30,5 @@ bank-modal {
 	.col {
 		padding: 0px 10px !important;
 	}
+
 }

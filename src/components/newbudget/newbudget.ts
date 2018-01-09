@@ -16,7 +16,7 @@ import { Budget } from '../../interfaces/budget.interface';
 })
 export class NewbudgetComponent {
 
-	money: number = 0;
+	money: number = 70;
 	startDate: string;
 	endDate: string;
 	currentDate: string;
