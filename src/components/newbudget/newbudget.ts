@@ -29,7 +29,7 @@ export class NewbudgetComponent {
 
 		this.startDate = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
 		let e1 = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
-		let e2 = Date.parse(e1) + (7 * (1000*3600*24));
+		let e2 = Date.parse(e1) + (6 * (1000*3600*24));
 		this.endDate = new Date(e2 - tzoffset).toISOString();
 
 		this.currentDate = this.startDate;
@@ -38,11 +38,15 @@ export class NewbudgetComponent {
 	submit(){
 		let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 
-		let dailyAmount = this.money / this.daysBetween(this.startDate, this.endDate);
+		console.log("Counting for this many days" + (this.daysBetween(this.startDate, this.endDate) + 2));
+
+		let dailyAmount = this.money / (this.daysBetween(this.startDate, this.endDate) + 2);
 		let startAmount = dailyAmount;
 		let daysBetween = this.daysBetween(this.startDate, this.endDate) + 1;
+
+		console.log("The Daily Seed: " + dailyAmount);
 		
-		for(let i = 0; i < daysBetween; i++){
+		for(let i = 0; i < daysBetween + 1; i++){
 			let r = Math.random() * dailyAmount;
 			let leftOver = dailyAmount - parseFloat(r.toFixed(2));
 			dailyAmount = startAmount + parseFloat(leftOver.toFixed(2));
@@ -70,6 +74,8 @@ export class NewbudgetComponent {
 
 		this._bp.setBudget(this.dailyBudget);
 
+		console.log(this.dailyBudget);
+
 		this._nc.push(BudgetPage);
 	}
 
@@ -83,6 +89,14 @@ export class NewbudgetComponent {
 			sum += arr[i];
 		}
 		return sum.toFixed(2);
+	}
+
+	onChange(e){
+
+		if(this.daysBetween(this.startDate, this.endDate) < 0){
+			this.endDate = this.startDate;
+		}
+		
 	}
 
 }

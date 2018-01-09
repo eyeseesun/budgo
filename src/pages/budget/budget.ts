@@ -18,6 +18,8 @@ import { Budget } from '../../interfaces/budget.interface';
 export class BudgetPage {
 	@ViewChild(Slides) slides: Slides;
 	budget: Array<Budget>;
+	trimmedBudget: Array<Budget> = [];
+	trimBy: number;
 	style: Object = {
 		'left': '0%'
 	};
@@ -25,6 +27,16 @@ export class BudgetPage {
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private _bp: BudgetProvider, private events: Events) {
 		this.budget = _bp.getBudget();
+
+		let todaysDate = new Date().toISOString();
+
+		this.trimBy = this.daysBetween(this.budget[0].date, todaysDate);
+
+		for(let i = 0; i <= this.trimBy; i++){
+			this.trimmedBudget.push(this.budget[i]);
+		}
+
+		console.log(this.trimmedBudget);
 	}
 
 	left(){
@@ -44,8 +56,19 @@ export class BudgetPage {
 
 	}
 
+	convertDate(date: string){
+		let monthNames = ["January", "February", "March", "April", "May", "June",
+		  "July", "August", "September", "October", "November", "December"
+		];
+		return (new Date(date).getDate()) + " " + (monthNames[new Date(date).getMonth()]) + " " + (new Date(date).getFullYear());
+	}
+
 	slideChanged(){
 		this._bp.setActiveBudget(this.slides.getActiveIndex());
+	}
+
+	daysBetween(date1String, date2String){
+	  return Math.floor((Date.parse(date2String)-Date.parse(date1String))/(1000*3600*24));
 	}
 
 }

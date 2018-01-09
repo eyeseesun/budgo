@@ -1,9 +1,15 @@
 <ion-content>
 	<topbar></topbar>
-	<ion-slides [centeredSlides]="true" [effect]="fade" (ionSlideDidChange)="slideChanged()" [ngStyle]="style">
-		<ion-slide *ngFor="let b of budget; let i = index">
+	<ion-slides *ngIf="trimBy >= 0" (ionSlideDidChange)="slideChanged()" [ngStyle]="style">
+		<ion-slide *ngFor="let b of trimmedBudget; let i = index">
 			<budget [bID]="i" ></budget>
 		</ion-slide>
 	</ion-slides>
+	<div class="table">
+		<div class="cell">
+			<p>Your budget will be available:</p>
+			<p class="purple">{{ convertDate(budget[0].date) }}</p>
+		</div>
+	</div>
 	<nav-fab></nav-fab>
 </ion-content>

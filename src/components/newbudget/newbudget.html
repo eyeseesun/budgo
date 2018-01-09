@@ -1,8 +1,8 @@
-<div class="title inline special-margin">
+<div class="title title-inline special-margin">
 	<span>Some Questions</span>
 </div>
 
-<div class="container">
+<div class="wrapper">
 	<br>
 	<div class="title inline z2">
 		<span>Your Budget:</span>
@@ -25,14 +25,14 @@
 	<div class="container z1">
 		<ion-item no-lines>
 		  <ion-label>Start:</ion-label>
-		  <ion-datetime displayFormat="MMM DD 'YY" [min]="currentDate" max="2025-12-31" pickerFormat="MMM DDD YY" [(ngModel)]="startDate" #d1="ngModel"></ion-datetime>
+		  <ion-datetime displayFormat="MMM DD 'YY" [min]="currentDate" max="2025-12-31" pickerFormat="MMM DDD YY" [(ngModel)]="startDate" #d1="ngModel" (ngModelChange)="onChange($event)"></ion-datetime>
 		</ion-item>		
 		<div class="icon">
 			<ion-icon class="green" name="arrow-down"></ion-icon>
 		</div>		
 		<ion-item no-lines>
 		  <ion-label>End:</ion-label>
-		  <ion-datetime displayFormat="MMM DD 'YY" [min]="currentDate" max="2025-12-31" pickerFormat="MMM DDD YY" [(ngModel)]="endDate" #d2="ngModel"></ion-datetime>
+		  <ion-datetime displayFormat="MMM DD 'YY" [min]="startDate" max="2025-12-31" pickerFormat="MMM DDD YY" [(ngModel)]="endDate" #d2="ngModel"></ion-datetime>
 		</ion-item>
 	</div>
 	<br>

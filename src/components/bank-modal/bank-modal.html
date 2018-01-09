@@ -1,16 +1,18 @@
-<div class="overlay">
-	<ion-card>
-		<ion-card-header class="purple-bg"><strong class="white center big">Banked:</strong></ion-card-header>					
-		<div class="circle green-bg white">
+<header class="purple-bg center"><strong class="white big">Banked:</strong></header>
+<div class="bg">
+	<div class="table">
+		<div class="purple cell">
 			${{ banked | number: '1.2-2' }}
 		</div>
-		<div class="row">
-			<div class="col">
-				<button class="btn-style-alt center-btn" (click)="exit()">Cancel</button>				
-			</div>
-			<div class="col">
-				<button class="btn-style center-btn" (click)="withdrawAll()">Withdraw All</button>
-			</div>			
-		</div>		
-	</ion-card>
+	</div>
+	<p class="label">How much would you like to withdraw?</p>
+	<input type="number">
+	<div class="row">
+		<div class="col">
+			<button class="btn-style-alt" (click)="exit()">Cancel</button>	
+		</div>
+		<div class="col">
+			<button class="btn-style" (click)="withdrawAll()">Withdraw</button>
+		</div>
+	</div>
 </div>

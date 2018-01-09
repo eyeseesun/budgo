@@ -88,7 +88,6 @@ export class BudgetComponent {
 		this.budget[this.bID].spent.push(obj);
 		this.amount = this.amount - this.spend;
 		this.spendUpdate += this.spend;
-		console.log(this.budget[this.bID].bank);
 
 		this._bp.setBudget(this.budget);
 
