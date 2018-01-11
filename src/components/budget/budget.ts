@@ -79,6 +79,17 @@ export class BudgetComponent {
 
 		this.date = date.toLocaleDateString("en-us", options);
 		this.day = this.budget[this.bID].date.substring(8, 10);
+
+		let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+
+		let todaysDate = (new Date(Date.now() - tzoffset)).toISOString();
+		let todaysDateStr = Date.parse(todaysDate) + (5 * (1000*3600*24)); // To spoof the date
+		todaysDate = new Date(todaysDateStr - tzoffset).toISOString();
+		todaysDate = todaysDate.substr(0, 11) + "00:00:00.000" + todaysDate.substr(23, todaysDate.length);
+
+		if(parseInt(this.day) < parseInt(todaysDate.substr(8, 2))){
+			this.disabledAll = true;
+		}
 	}
 
 	spendMoney(){

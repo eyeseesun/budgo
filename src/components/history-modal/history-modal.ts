@@ -15,16 +15,35 @@ import { Events, ViewController } from 'ionic-angular';
 })
 export class HistoryModalComponent {
 
-	budgets: Array<Budget>;
+	budget: Array<Budget>;
+	trimmedBudget: Array<Budget> = [];
+	trimBy: number;
 
 	constructor(private _bp: BudgetProvider, private events: Events, private _vc: ViewController) {
-		this.budgets = _bp.getBudget();
+		this.budget = _bp.getBudget();
+
+		let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+
+		let todaysDate = (new Date(Date.now() - tzoffset)).toISOString();
+		let todaysDateStr = Date.parse(todaysDate) + (5 * (1000*3600*24)); // To spoof the date
+		todaysDate = new Date(todaysDateStr - tzoffset).toISOString();
+		todaysDate = todaysDate.substr(0, 11) + "00:00:00.000" + todaysDate.substr(23, todaysDate.length);
+
+		this.trimBy = this.daysBetween(this.budget[0].date, todaysDate);
+
+		if(this.trimBy < this.budget.length){
+			for(let i = 0; i <= this.trimBy; i++){
+				this.trimmedBudget.push(this.budget[i]);
+			}
+		} else {
+			this.trimmedBudget = this.budget;
+		}
 	}
 
 	refund(i: number, j: number){
-		this.budgets[i].spent.splice(j, 1);
+		this.budget[i].spent.splice(j, 1);
 
-		this._bp.setBudget(this.budgets);
+		this._bp.setBudget(this.budget);
 		this.events.publish('BudgetChanged' + i, { budget: i, spent: j});
 	}
 
@@ -37,6 +56,10 @@ export class HistoryModalComponent {
 
 	exit(){
 		this._vc.dismiss();
+	}
+
+	daysBetween(date1String, date2String){
+	  return Math.floor((Date.parse(date2String)-Date.parse(date1String))/(1000*3600*24));
 	}
 
 }

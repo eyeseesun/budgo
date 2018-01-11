@@ -1,0 +1,2 @@
+-If you don't spend money on the date, it gets auto banked.
+-You can withdraw a specific amount from the bank.

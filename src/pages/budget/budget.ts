@@ -31,10 +31,9 @@ export class BudgetPage {
 		let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 
 		let todaysDate = (new Date(Date.now() - tzoffset)).toISOString();
+		let todaysDateStr = Date.parse(todaysDate) + (5 * (1000*3600*24)); // To spoof the date
+		todaysDate = new Date(todaysDateStr - tzoffset).toISOString();
 		todaysDate = todaysDate.substr(0, 11) + "00:00:00.000" + todaysDate.substr(23, todaysDate.length);
-
-		console.log(this.budget[0].date);
-		console.log(todaysDate);
 
 		this.trimBy = this.daysBetween(this.budget[0].date, todaysDate);
 
@@ -48,28 +47,19 @@ export class BudgetPage {
 		
 	}
 
-	left(){
-		if(this.currentView < this.budget.length){
-			this.currentView++;
-			this.style['left'] = '-' + this.currentView + '0' + this.currentView + '%';
+	ionViewDidEnter(){
+		if(this.trimBy < this.budget.length && this.trimBy >= 0){
+			this.slides.slideTo(this.trimBy, 1000);
+		} else if(this.trimBy >= this.budget.length) {
+			this.slides.slideTo(this.budget.length - 1, 1000);
 		}
-		console.log(this.style);
-	}
-
-	right(){
-		if(this.currentView !== 0){
-			this.currentView--;
-			this.style['left'] = '-' + this.currentView + '0' + this.currentView + '%';
-		}
-		console.log(this.style);
-
 	}
 
 	convertDate(date: string){
 		let monthNames = ["January", "February", "March", "April", "May", "June",
 		  "July", "August", "September", "October", "November", "December"
 		];
-		return (new Date(date).getDate()) + " " + (monthNames[new Date(date).getMonth()]) + " " + (new Date(date).getFullYear());
+		return (date.substr(8, 2) + " " + (monthNames[new Date(date).getMonth()]) + " " + (new Date(date).getFullYear()));
 	}
 
 	slideChanged(){

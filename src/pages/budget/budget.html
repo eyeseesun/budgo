@@ -4,6 +4,13 @@
 		<ion-slide *ngFor="let b of trimmedBudget; let i = index">
 			<budget [bID]="i" ></budget>
 		</ion-slide>
+		<ion-slide *ngIf="trimBy < budget.length - 1 && trimBy >= 0">
+			<div class="table">
+				<div class="cell">
+					<p>Your next budget will be available <span class="purple">tomorrow!</span></p>
+				</div>
+			</div>
+		</ion-slide>
 	</ion-slides>
 	<div class="table">
 		<div class="cell">
