@@ -3,7 +3,7 @@
 		<strong class="day">{{ day }}</strong>
 		<span class="date">{{ date }}</span>
 	</div>
-	<div class="container">
+	<div class="container" [ngClass]="{'opaque': disabledAll}">
 		<div class="title z2 inline">Today's Budget</div>
 		<div class="dailybudget-container center z1">
 			<div class="small">
@@ -27,9 +27,9 @@
 				<div class="line"></div>
 				<div class="inputs">
 						<ion-label stacked>Name:<span class="red">*</span></ion-label>
-						<input type="text" [(ngModel)]="transName" [placeholder]="placeholderTName" #n="ngModel">
+						<input type="text" [(ngModel)]="transName" [placeholder]="placeholderTName" #n="ngModel" [disabled]="disabledAll">
 						<ion-label stacked>Cost:<span class="red">*</span></ion-label>
-						<input type="number" [(ngModel)]="spend" #s="ngModel">
+						<input type="number" [(ngModel)]="spend" #s="ngModel" [disabled]="disabledAll">
 						<p class="red" *ngIf="s.value > 9999.99">This app isn't meant for you</p>
 				</div>
 				<div class="row">
@@ -37,7 +37,7 @@
 						<button class="btn-style">History</button>
 					</div> -->
 					<div class="col">
-						<button class="btn-style" (click)="spendMoney()" [disabled]="n.value == '' || s.value < 0.01 || !s.value || s.value > 9999.99">Spend</button>
+						<button class="btn-style" (click)="spendMoney()" [disabled]="n.value == '' || s.value < 0.01 || !s.value || s.value > 9999.99 || disabledAll">Spend</button>
 					</div>
 				</div>
 			</div>
@@ -48,7 +48,7 @@
 					<ion-label stacked>Amount:</ion-label>
 					<input type="number" [(ngModel)]="bank" #b="ngModel">
 				</div>				
-				<button class="btn-style" (click)="bankMoney()" [disabled]="b.value > amount">Bank</button>
+				<button class="btn-style" (click)="bankMoney()" [disabled]="b.value > amount || disabledAll">Bank</button>
 				<p class="red" *ngIf="b.value > amount">You can't bank more money than you have</p>
 			</div>
 		</div>

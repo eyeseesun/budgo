@@ -1,17 +1,11 @@
 newbudget {
 
-	.title-inline {
-		position: relative;
-		left: 10%;
-	}
-
-	.special-margin {
-		margin: 0px 0px 10px 0px;
-	}
-
 	.wrapper {
-		width: 80%;
-		margin: 0 auto;
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	.wrapper-inner {
 		padding: 5px 0px;
 		background-color: white;
 		height: auto;
@@ -123,20 +117,14 @@ newbudget {
 	}
 
 	@media(min-width: 600px){
-		.wrapper {
-			width: 40vw;
-		}
 		.title-inline {
 			left: 30vw;
 		}
 	}
 
 	@media(min-width: 900px){
-		.wrapper {
-			width: 20vw;
-		}
 		.title-inline {
-			left: 40vw;
+			left: 35vw;
 		}
 	}
 }

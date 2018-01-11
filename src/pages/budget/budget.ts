@@ -28,15 +28,24 @@ export class BudgetPage {
 	constructor(public navCtrl: NavController, public navParams: NavParams, private _bp: BudgetProvider, private events: Events) {
 		this.budget = _bp.getBudget();
 
-		let todaysDate = new Date().toISOString();
+		let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+
+		let todaysDate = (new Date(Date.now() - tzoffset)).toISOString();
+		todaysDate = todaysDate.substr(0, 11) + "00:00:00.000" + todaysDate.substr(23, todaysDate.length);
+
+		console.log(this.budget[0].date);
+		console.log(todaysDate);
 
 		this.trimBy = this.daysBetween(this.budget[0].date, todaysDate);
 
-		for(let i = 0; i <= this.trimBy; i++){
-			this.trimmedBudget.push(this.budget[i]);
+		if(this.trimBy < this.budget.length){
+			for(let i = 0; i <= this.trimBy; i++){
+				this.trimmedBudget.push(this.budget[i]);
+			}
+		} else {
+			this.trimmedBudget = this.budget;
 		}
-
-		console.log(this.trimmedBudget);
+		
 	}
 
 	left(){

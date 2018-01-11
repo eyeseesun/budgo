@@ -8,13 +8,21 @@ page-new-budget {
         background-size: cover;	
 	}
 
-	logo {
-		position: relative;
-		top: 5vh;
+	newbudget {
+		display: table;
+		height: 100vh;
+		width: 80vw;
+		margin: 0 auto;
 	}
 
-	newbudget {
-		position: relative;
-		top: 7vh;
+	@media(min-width: 600px){
+		newbudget {
+			width: 40vw;
+		}
+	}
+	@media(min-width: 900px){
+		newbudget {
+			width: 30vw;
+		}
 	}
 }

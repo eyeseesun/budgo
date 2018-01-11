@@ -1,40 +1,42 @@
-<div class="title title-inline special-margin">
-	<span>Some Questions</span>
-</div>
-
 <div class="wrapper">
-	<br>
-	<div class="title inline z2">
-		<span>Your Budget:</span>
+	<div class="title z2">
+		<span>Some Questions</span>
 	</div>
-	<div class="container z1">
-		<div class="input-container">
-			<div class="circle-input green-bg">
-				<input class="inner-circle" type="number" min="0" step="2" [(ngModel)]="money" #m="ngModel">
-			</div>
-			<div class="errors" *ngIf="m.value < 0 || m.value < daysBetween(startDate, endDate)">
-				<span class="red" *ngIf="m.value < 0">*Must be greater than $0</span>
-				<span class="red" *ngIf="m.value < daysBetween(startDate, endDate) && m.untouched == false">*Must have more dollars than days in budget</span>
-			</div>	
+
+	<div class="wrapper-inner z1">
+		<br>
+		<div class="title inline z2">
+			<span>Your Budget:</span>
 		</div>
+		<div class="container z1">
+			<div class="input-container">
+				<div class="circle-input green-bg">
+					<input class="inner-circle" type="number" min="0" step="2" [(ngModel)]="money" #m="ngModel">
+				</div>
+				<div class="errors" *ngIf="m.value < 0 || m.value < daysBetween(startDate, endDate)">
+					<span class="red" *ngIf="m.value < 0">*Must be greater than $0</span>
+					<span class="red" *ngIf="m.value < daysBetween(startDate, endDate) && m.untouched == false">*Must have more dollars than days in budget</span>
+				</div>	
+			</div>
+		</div>
+		<br>
+		<div class="title inline z2">
+			<span>To Last Until:</span>
+		</div>
+		<div class="container z1">
+			<ion-item no-lines>
+			  <ion-label>Start:</ion-label>
+			  <ion-datetime displayFormat="MMM DD 'YY" [min]="currentDate" max="2025-12-31" pickerFormat="MMM DDD YY" [(ngModel)]="startDate" #d1="ngModel" (ngModelChange)="onChange($event)"></ion-datetime>
+			</ion-item>		
+			<div class="icon">
+				<ion-icon class="green" name="arrow-down"></ion-icon>
+			</div>		
+			<ion-item no-lines>
+			  <ion-label>End:</ion-label>
+			  <ion-datetime displayFormat="MMM DD 'YY" [min]="startDate" max="2025-12-31" pickerFormat="MMM DDD YY" [(ngModel)]="endDate" #d2="ngModel"></ion-datetime>
+			</ion-item>
+		</div>
+		<br>
 	</div>
-	<br>
-	<div class="title inline z2">
-		<span>To Last Until:</span>
-	</div>
-	<div class="container z1">
-		<ion-item no-lines>
-		  <ion-label>Start:</ion-label>
-		  <ion-datetime displayFormat="MMM DD 'YY" [min]="currentDate" max="2025-12-31" pickerFormat="MMM DDD YY" [(ngModel)]="startDate" #d1="ngModel" (ngModelChange)="onChange($event)"></ion-datetime>
-		</ion-item>		
-		<div class="icon">
-			<ion-icon class="green" name="arrow-down"></ion-icon>
-		</div>		
-		<ion-item no-lines>
-		  <ion-label>End:</ion-label>
-		  <ion-datetime displayFormat="MMM DD 'YY" [min]="startDate" max="2025-12-31" pickerFormat="MMM DDD YY" [(ngModel)]="endDate" #d2="ngModel"></ion-datetime>
-		</ion-item>
-	</div>
-	<br>
+	<button class="btn-style" (click)="submit()" [disabled]="m.value < 0 || m.value == 0 || m.value < daysBetween(startDate, endDate)">Ready to Save</button>
 </div>
-<button class="btn-style" (click)="submit()" [disabled]="m.value < 0 || m.value == 0 || m.value < daysBetween(startDate, endDate)">Ready to Save</button>

@@ -63,8 +63,10 @@ export class NewbudgetComponent {
 		let budgetObj: Budget;
 
 		for(let i = 0; i < this.budget.length; i++){
+			let nd = new Date(Date.parse(this.startDate) - tzoffset + (i * (1000*3600*24))).toISOString();
+			let normalizedDate = nd.substr(0, 11) + "00:00:00.000" + nd.substr(23, nd.length);
 			budgetObj = {
-				date: new Date(Date.parse(this.startDate) - tzoffset + (i * (1000*3600*24))).toISOString(),
+				date: normalizedDate,
 				amount: parseFloat(this.budget[i].toFixed(2)),
 				spent: [],
 				bank: 0

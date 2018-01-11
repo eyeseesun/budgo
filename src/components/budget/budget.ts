@@ -33,6 +33,7 @@ export class BudgetComponent {
 	timer;
 	playing = false;
 	active: Array<boolean> = [true, false];
+	disabledAll: boolean = false;
 
 	constructor(private _bp: BudgetProvider, private events: Events) {
 		
