@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { InfoBtnComponent } from '../info-btn/info-btn';
 import { HistoryModalComponent } from '../history-modal/history-modal';
@@ -15,6 +15,8 @@ import { BankModalComponent } from '../bank-modal/bank-modal';
   templateUrl: 'nav-fab.html'
 })
 export class NavFabComponent {
+
+	@Input() hideExtra: boolean = false;
 
 	constructor(private _mc: ModalController, private _nc: NavController) {
 	}

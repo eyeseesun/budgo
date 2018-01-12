@@ -25,9 +25,6 @@
 						<p class="red" *ngIf="s.value > 9999.99">This app isn't meant for you</p>
 				</div>
 				<div class="row">
-					<!-- <div class="col">
-						<button class="btn-style">History</button>
-					</div> -->
 					<div class="col">
 						<button class="btn-style" (click)="spendMoney()" [disabled]="n.value == '' || s.value < 0.01 || !s.value || s.value > 9999.99 || disabledAll">Spend</button>
 					</div>
