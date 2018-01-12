@@ -16,12 +16,26 @@ export class BudgetProvider {
 
 	budget: Array<Budget>;
 	activeBudget: number = 0;
+	banked: number = 0;
+	totalBudget: number = 0;
 
 	constructor(public http: Http, private _storage: Storage, private events: Events) {
 		_storage.get('budget').then((val) => {
 			if(val){
 				this.budget = val;
 				this.events.publish('CurrentBudget', true);
+			}
+		});
+		_storage.get('banked').then((val)=>{
+			if(val || val == 0){
+				this.banked = val;
+				this.events.publish('Banked', true);
+			}
+		});
+		_storage.get('totalBudget').then((val)=>{
+			if(val){
+				this.totalBudget = val;
+				this.events.publish('totalBudget', true);
 			}
 		});
 	}
@@ -41,6 +55,29 @@ export class BudgetProvider {
 
 	getActiveBudget(){
 		return this.activeBudget;
+	}
+
+	setBanked(amount: number){
+		this.banked = amount;
+		this._storage.set('banked', this.banked);
+	}
+
+	addToBank(amount: number){
+		this.banked += amount;
+		this._storage.set('banked', this.banked);
+	}
+
+	getBanked(){
+		return this.banked;
+	}
+
+	setTotalBudget(amount: number){
+		this.totalBudget = amount;
+		this._storage.set('totalBudget', this.totalBudget);
+	}
+
+	getTotalBudget(){
+		return this.totalBudget;
 	}
 
 }

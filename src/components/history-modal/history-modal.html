@@ -3,7 +3,7 @@
 		<button class="white red-bg back-btn" (click)="exit()">back</button>
 	Spending History</header>
 	<ion-card *ngFor="let trimBy of trimmedBudget; let i = index">
-		<ion-card-header class="purple-bg"><strong class="white">{{ convertDate(trimBy.date) }}</strong></ion-card-header>					
+		<ion-card-header class="purple-bg"><strong class="white">{{ convertDate(trimBy.date) }}</strong></ion-card-header>
 			<ion-list>
 				<ion-item *ngIf="trimBy.spent.length <= 0">
 					<ion-icon name="cash" class="green"></ion-icon>
@@ -12,11 +12,11 @@
 				<ion-item *ngFor="let spent of trimBy.spent; let j = index">
 					<div *ngIf="trimBy.spent.length > 0">
 						<strong class="price purple">
-							${{spent.amount}} 
+							${{spent.amount | number: '1.2-2'}} 
 						</strong>
 						<strong class="green">
 							{{ spent.transName }}
-						</strong>fdsa
+						</strong>
 						<button ion-button class="right red-bg" (click)="refund(i, j)">
 							Refund
 						</button>
@@ -24,4 +24,13 @@
 			    </ion-item>
 			</ion-list>
 	</ion-card>
+	<div class="center">
+		<span class="purple">Total amount spent: </span><strong class="green">${{ totalSpent | number: '1.2-2' }}</strong>
+	</div>
+	<div class="center">
+		<span class="purple">Total budget: </span><strong class="green">${{ totalBudget | number: '1.2-2' }}</strong>
+	</div>
+	<div class="center">
+		<span class="purple">Total Left: </span><strong class="green" [ngClass]="{'red': ((totalBudget - totalSpent) < 0)}">${{ totalBudget - totalSpent | number: '1.2-2' }}</strong>
+	</div>
 </ion-content>

@@ -1,8 +1,16 @@
 history-modal {
+
+	.center {
+		position: relative;
+		top: 10vh;
+		font-family: $font;
+		text-align: center;
+	}
+
 	.price {
 		width: 30%;
 		height: 100%;
-		font-size: 24px;
+		font-size: 20px;
 	}
 
 	ion-card {
@@ -49,5 +57,10 @@ history-modal {
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
+	}
+
+	ion-item {
+		padding: 0 !important;
+		border-bottom: 1px solid #ded !important;
 	}
 }

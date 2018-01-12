@@ -18,15 +18,18 @@ export class HistoryModalComponent {
 	budget: Array<Budget>;
 	trimmedBudget: Array<Budget> = [];
 	trimBy: number;
+	totalSpent: number = 0.00;
+	totalBudget: number = 0.00;
 
 	constructor(private _bp: BudgetProvider, private events: Events, private _vc: ViewController) {
 		this.budget = _bp.getBudget();
+		this.totalBudget = _bp.getTotalBudget();
 
 		let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 
 		let todaysDate = (new Date(Date.now() - tzoffset)).toISOString();
-		let todaysDateStr = Date.parse(todaysDate) + (5 * (1000*3600*24)); // To spoof the date
-		todaysDate = new Date(todaysDateStr - tzoffset).toISOString();
+		// let todaysDateStr = Date.parse(todaysDate) + (5 * (1000*3600*24)); // To spoof the date
+		// todaysDate = new Date(todaysDateStr - tzoffset).toISOString();
 		todaysDate = todaysDate.substr(0, 11) + "00:00:00.000" + todaysDate.substr(23, todaysDate.length);
 
 		this.trimBy = this.daysBetween(this.budget[0].date, todaysDate);
@@ -38,6 +41,8 @@ export class HistoryModalComponent {
 		} else {
 			this.trimmedBudget = this.budget;
 		}
+
+		this.updateTotalSpent();
 	}
 
 	refund(i: number, j: number){
@@ -45,6 +50,10 @@ export class HistoryModalComponent {
 
 		this._bp.setBudget(this.budget);
 		this.events.publish('BudgetChanged' + i, { budget: i, spent: j});
+
+		this.totalSpent = 0;
+
+		this.updateTotalSpent();
 	}
 
 	convertDate(date: string){
@@ -60,6 +69,14 @@ export class HistoryModalComponent {
 
 	daysBetween(date1String, date2String){
 	  return Math.floor((Date.parse(date2String)-Date.parse(date1String))/(1000*3600*24));
+	}
+
+	updateTotalSpent(){
+		for(let i = 0; i < this.trimmedBudget.length; i++){
+			for(let j = 0; j < this.trimmedBudget[i].spent.length; j++){
+				this.totalSpent += this.trimmedBudget[i].spent[j].amount;
+			}
+		}
 	}
 
 }

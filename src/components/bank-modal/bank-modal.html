@@ -6,13 +6,13 @@
 		</div>
 	</div>
 	<p class="label">How much would you like to withdraw?</p>
-	<input type="number">
+	<input type="number" [(ngModel)]="withdraw" #w="ngModel">
 	<div class="row">
 		<div class="col">
 			<button class="btn-style-alt" (click)="exit()">Cancel</button>	
 		</div>
 		<div class="col">
-			<button class="btn-style" (click)="withdrawAll()">Withdraw</button>
+			<button class="btn-style" (click)="withdrawSpec()" [disabled]="w.value <= 0 || w.value > banked">Withdraw</button>
 		</div>
 	</div>
 </div>

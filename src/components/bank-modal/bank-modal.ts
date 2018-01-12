@@ -18,17 +18,30 @@ export class BankModalComponent {
 	budget: Array<Budget>;
 	id: number = 0;
 	banked: number = 0;
+	withdraw: number = 0;
 
 	constructor(private _bp: BudgetProvider, private _nc: NavController, private events: Events) {	
 		this.budget = _bp.getBudget();
 		this.id = _bp.getActiveBudget();
 
-		for(let i = 0; i < this.budget.length; i++){
-			this.banked += this.budget[i].bank;
-		}
+		this.banked = this._bp.getBanked();
+
+		this._bp.setBanked(this.banked);
 	}
 
 	exit(){
+		this._nc.pop();
+	}
+
+	withdrawSpec(){
+		this.banked -= this.withdraw;
+		this.budget[this.id].amount += this.withdraw;
+		this._bp.setBudget(this.budget);
+		this._bp.setBanked(this.banked);
+		for(let i = 0; i < this.budget.length; i++){
+			this.events.publish('BudgetChanged' + i);
+		}
+		this.withdraw = 0;
 		this._nc.pop();
 	}
 
@@ -38,7 +51,6 @@ export class BankModalComponent {
 				this.budget[i].amount -= this.budget[i].bank;
 			}
 			this.budget[i].bank = 0;
-			console.log(this.budget[i]);
 		}
 		this.budget[this.id].amount += this.banked;
 		this._bp.setBudget(this.budget);

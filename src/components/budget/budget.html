@@ -6,16 +6,8 @@
 	<div class="container" [ngClass]="{'opaque': disabledAll}">
 		<div class="title z2 inline">Today's Budget</div>
 		<div class="dailybudget-container center z1">
-			<div class="small">
-				<strong class="purple">${{ amountOrig | number: '1.2-2' }}</strong>
-				<strong class="red">-</strong>
-				<strong class="red">${{ spendUpdate | number: '1.2-2' }}</strong>
-				<strong class="red">-</strong>
-				<strong class="green">${{ bankUpdate | number: '1.2-2' }}</strong>
-			</div>
 			
-
-			<strong [ngClass]="{'med2': amount < -9.99 && amount > -99.99, 'med': amount < -99.99 }" class="green big">=</strong><strong [ngClass]="{'med2': amount < -9.99 && amount > -99.99, 'med': amount < -99.99 }" class="purple big">${{ amount | number: '1.2-2'}}</strong>
+			<strong class="purple big">${{ amount | number: '1.2-2'}}</strong>
 		</div>
 		<div class="inline break">
 			<span class="z2" [ngClass]="{'inactive': !active[0], 'title': !active[0], 'title-inverse': active[0]}" (click)="activateTab(0)">Spend</span>

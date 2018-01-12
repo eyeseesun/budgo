@@ -83,8 +83,8 @@ export class BudgetComponent {
 		let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 
 		let todaysDate = (new Date(Date.now() - tzoffset)).toISOString();
-		let todaysDateStr = Date.parse(todaysDate) + (5 * (1000*3600*24)); // To spoof the date
-		todaysDate = new Date(todaysDateStr - tzoffset).toISOString();
+		// let todaysDateStr = Date.parse(todaysDate) + (5 * (1000*3600*24)); // To spoof the date
+		// todaysDate = new Date(todaysDateStr - tzoffset).toISOString();
 		todaysDate = todaysDate.substr(0, 11) + "00:00:00.000" + todaysDate.substr(23, todaysDate.length);
 
 		if(parseInt(this.day) < parseInt(todaysDate.substr(8, 2))){
@@ -113,6 +113,7 @@ export class BudgetComponent {
 		this.bankUpdate += this.bank;
 
 		this.budget[this.bID].bank += this.bank;
+		this._bp.addToBank(this.bank);
 
 		this._bp.setBudget(this.budget);
 		this.bank = 0;

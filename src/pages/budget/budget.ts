@@ -31,8 +31,8 @@ export class BudgetPage {
 		let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 
 		let todaysDate = (new Date(Date.now() - tzoffset)).toISOString();
-		let todaysDateStr = Date.parse(todaysDate) + (5 * (1000*3600*24)); // To spoof the date
-		todaysDate = new Date(todaysDateStr - tzoffset).toISOString();
+		// let todaysDateStr = Date.parse(todaysDate) + (5 * (1000*3600*24)); // To spoof the date
+		// todaysDate = new Date(todaysDateStr - tzoffset).toISOString();
 		todaysDate = todaysDate.substr(0, 11) + "00:00:00.000" + todaysDate.substr(23, todaysDate.length);
 
 		this.trimBy = this.daysBetween(this.budget[0].date, todaysDate);

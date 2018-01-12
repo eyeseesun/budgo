@@ -75,6 +75,7 @@ export class NewbudgetComponent {
 		}
 
 		this._bp.setBudget(this.dailyBudget);
+		this._bp.setTotalBudget(this.money);
 
 		console.log(this.dailyBudget);
 
