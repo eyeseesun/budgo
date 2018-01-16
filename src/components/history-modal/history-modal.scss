@@ -1,8 +1,15 @@
 history-modal {
 
+	.red {
+		color: $red !important;
+	}
+
+	.padding {
+		padding: 15px;
+	}
+
 	.center {
-		position: relative;
-		top: 10vh;
+		margin: 5px auto;
 		font-family: $font;
 		text-align: center;
 	}

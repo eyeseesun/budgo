@@ -12,11 +12,11 @@
 			</div>
 		</ion-slide>
 	</ion-slides>
-	<div class="table">
+	<div *ngIf="trimBy < 0" class="table">
 		<div class="cell">
 			<p>Your budget will be available:</p>
 			<p class="purple start-date">{{ convertDate(budget[0].date) }}</p>
 		</div>
 	</div>
-	<nav-fab></nav-fab>
+	<nav-fab [hideExtra]="trimBy < 0"></nav-fab>
 </ion-content>

@@ -3,6 +3,7 @@ import { NavController, Events } from 'ionic-angular';
 import { NewBudgetPage } from '../../pages/new-budget/new-budget';
 import { BudgetPage } from '../../pages/budget/budget';
 import { BudgetProvider } from '../../providers/budget/budget';
+import { Budget } from '../../interfaces/budget.interface';
 
 /**
  * Generated class for the StartContainerComponent component.
@@ -26,6 +27,10 @@ export class StartContainerComponent {
 		this.events.subscribe('CurrentBudget', ()=>{
 			this.currentBudget = false;
 		});
+	}
+
+	ionViewWillEnter(){
+		this.currentBudget = this._bp.checkBudget();
 	}
 
 	goToCurrentBudget(){

@@ -10,9 +10,10 @@
 		</div>
 		<div class="container z1">
 			<div class="input-container">
-				<div class="circle-input green-bg">
-					<input class="inner-circle" type="number" min="0" step="2" [(ngModel)]="money" #m="ngModel">
-				</div>
+				<ion-item>
+					<ion-label>$</ion-label>
+					<ion-input type="number" min="0" step="2" [(ngModel)]="money" #m="ngModel"></ion-input>
+				</ion-item>
 				<div class="errors" *ngIf="m.value < 0 || m.value < daysBetween(startDate, endDate)">
 					<span class="red" *ngIf="m.value < 0">*Must be greater than $0</span>
 					<span class="red" *ngIf="m.value < daysBetween(startDate, endDate) && m.untouched == false">*Must have more dollars than days in budget</span>

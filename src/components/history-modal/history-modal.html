@@ -22,15 +22,22 @@
 						</button>
 					</div>
 			    </ion-item>
+			    <ion-item>
+			    	<strong class="price purple">Daily Debt: </strong><strong class="green">${{-_bp.getDebt(i) | number: '1.2-2'}}</strong>
+			    	<button ion-button class="right green-bg" (click)="payDebt(i)" [disabled]="budget[this._bp.getActiveBudget()].amount - spent(this._bp.getActiveBudget()) < 0 && -_bp.getDebt(i) > 0">Pay Debt</button>
+			    </ion-item>
+			    <p class="red padding" *ngIf="budget[this._bp.getActiveBudget()].amount - spent(this._bp.getActiveBudget()) < 0 && -_bp.getDebt(i) > 0">Use another day to pay this debt!</p>
 			</ion-list>
 	</ion-card>
-	<div class="center">
-		<span class="purple">Total amount spent: </span><strong class="green">${{ totalSpent | number: '1.2-2' }}</strong>
-	</div>
-	<div class="center">
-		<span class="purple">Total budget: </span><strong class="green">${{ totalBudget | number: '1.2-2' }}</strong>
-	</div>
-	<div class="center">
-		<span class="purple">Total Left: </span><strong class="green" [ngClass]="{'red': ((totalBudget - totalSpent) < 0)}">${{ totalBudget - totalSpent | number: '1.2-2' }}</strong>
-	</div>
+	<ion-card>
+		<div class="center">
+			<span class="purple">Total amount spent: </span><strong class="green">${{ totalSpent | number: '1.2-2' }}</strong>
+		</div>
+		<div class="center">
+			<span class="purple">Total budget: </span><strong class="green">${{ totalBudget | number: '1.2-2' }}</strong>
+		</div>
+		<div class="center">
+			<span class="purple">Total Left: </span><strong class="green" [ngClass]="{'red': ((totalBudget - totalSpent) < 0)}">${{ totalBudget - totalSpent | number: '1.2-2' }}</strong>
+		</div>
+	</ion-card>
 </ion-content>

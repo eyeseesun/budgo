@@ -26,6 +26,7 @@ export class BudgetProvider {
 				this.events.publish('CurrentBudget', true);
 			}
 		});
+		// _storage.set('budget', undefined);
 		_storage.get('banked').then((val)=>{
 			if(val || val == 0){
 				this.banked = val;
@@ -42,7 +43,13 @@ export class BudgetProvider {
 
 	setBudget(arr: Array<Budget>){
 		this.budget = arr;
+		console.log(this.budget);
 		this._storage.set('budget', this.budget);
+		this.events.publish('CurrentBudget');
+	}
+
+	checkBudget(){
+		return this.budget !== undefined;
 	}
 
 	getBudget(){
@@ -80,4 +87,24 @@ export class BudgetProvider {
 		return this.totalBudget;
 	}
 
+	getDebt(id: number){
+		return this.budget[id].debt;
+	}
+
+	setDebt(id: number, debt: number){
+		this.budget[id].debt = debt;
+		this._storage.set('budget', this.budget);
+	}
+
+	addToDebtPaid(id: number, pay: number){
+		this.budget[id].paidDebt += pay;
+	}
+
+	setDebtPaid(id: number, debt: number){
+		this.budget[id].paidDebt = debt;
+	}
+
+	getDebtPaid(id: number){
+		return this.budget[id].paidDebt;
+	}
 }

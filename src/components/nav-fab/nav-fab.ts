@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { InfoBtnComponent } from '../info-btn/info-btn';
+import { HomePage } from '../../pages/home/home';
 import { HistoryModalComponent } from '../history-modal/history-modal';
 import { BankModalComponent } from '../bank-modal/bank-modal';
 

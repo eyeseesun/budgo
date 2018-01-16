@@ -23,23 +23,6 @@ newbudget {
 		box-shadow: $box-shadow;
 	}
 
-	.circle-input {
-		display: block;
-		margin: 0 auto;
-		border-radius: 50%;
-		height: 100px;
-		width: 100px;
-		text-align: center;
-	}
-
-	.inner-circle {
-		position: relative;
-		top: 34px;
-		color: white !important;
-		background-color: transparent;
-		border: none;
-	}
-
 	.label {
 		float: left;
 	}
@@ -53,18 +36,13 @@ newbudget {
 	}
 	
 	.input-container {
-		width: 80%;
-		margin: 0 auto;
-		padding: 15px;
+		padding: 5px 15px;
 	}
 
-	input[type="number"] {
-		text-align: center;
-		border: none;
-		border-bottom: 1px solid $green;
-		font-size: 24px;
-		width: 80%;
+	input[type="number"]{
+		text-align: right;
 		color: $green;
+		font-size: 24px;
 	}
 
 	.dollarSize {

@@ -4,5 +4,7 @@ export interface Budget {
 	date: string,
 	amount: number,
 	spent: Array<Spend>,
-	bank: number
+	bank: number,
+	debt: number,
+	paidDebt: number
 }

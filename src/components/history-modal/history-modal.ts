@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BudgetProvider } from '../../providers/budget/budget';
 import { Budget } from '../../interfaces/budget.interface';
-import { Events, ViewController } from 'ionic-angular';
+import { Events, ViewController, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the HistoryModalComponent component.
@@ -21,15 +21,15 @@ export class HistoryModalComponent {
 	totalSpent: number = 0.00;
 	totalBudget: number = 0.00;
 
-	constructor(private _bp: BudgetProvider, private events: Events, private _vc: ViewController) {
+	constructor(private _bp: BudgetProvider, private events: Events, private _vc: ViewController, private _ac: AlertController) {
 		this.budget = _bp.getBudget();
 		this.totalBudget = _bp.getTotalBudget();
 
 		let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 
 		let todaysDate = (new Date(Date.now() - tzoffset)).toISOString();
-		// let todaysDateStr = Date.parse(todaysDate) + (5 * (1000*3600*24)); // To spoof the date
-		// todaysDate = new Date(todaysDateStr - tzoffset).toISOString();
+		let todaysDateStr = Date.parse(todaysDate) + (5 * (1000*3600*24)); // To spoof the date
+		todaysDate = new Date(todaysDateStr - tzoffset).toISOString();
 		todaysDate = todaysDate.substr(0, 11) + "00:00:00.000" + todaysDate.substr(23, todaysDate.length);
 
 		this.trimBy = this.daysBetween(this.budget[0].date, todaysDate);
@@ -46,10 +46,57 @@ export class HistoryModalComponent {
 	}
 
 	refund(i: number, j: number){
-		this.budget[i].spent.splice(j, 1);
+		let spentArr = this.budget[i].spent.splice(j, 1);
+		let spent = spentArr[0].amount;
+
+		let debt = this.budget[i].debt;
+
+		console.log(this.budget[i].debt);
+		console.log(this.budget[i].paidDebt);
+
+		if(-debt >= 0 && this.budget[i].paidDebt > 0){
+			let newSpent = 0;
+			for(let j = 0; j < this.budget[i].spent.length; j++){
+				newSpent += this.budget[i].spent[j]['amount'];
+			}
+			let newAmount = this.budget[i].amount - this.budget[i].bank;
+			newAmount -= newSpent;
+			console.log(-(newAmount + -debt - spent));
+			this._bp.addToBank(this._bp.getDebtPaid(i));
+			this._bp.setDebtPaid(i, 0);
+
+			let alert = this._ac.create({
+				title: 'Debt Refund!',
+				message: 'It looks like you started paying off an item you refunded. We\'ve put that money into your bank!',
+				buttons: [
+					{
+						text: 'Okay!',
+						role: 'cancel'
+					}
+				]
+			});
+			alert.present();
+
+
+			if(newSpent !== 0 && newAmount <= 0){
+				this._bp.setDebt(i, newAmount);
+			}
+
+			console.log(newSpent);
+
+			if(newSpent == 0){
+				this._bp.setDebt(i, 0);
+			}
+
+		} else if(spent > -debt){
+			this._bp.setDebt(i, 0);
+		}
+		else if(spent < -debt){
+			this._bp.setDebt(i, this._bp.getDebt(i) + spent);
+		}
 
 		this._bp.setBudget(this.budget);
-		this.events.publish('BudgetChanged' + i, { budget: i, spent: j});
+		this.events.publish('BudgetChanged' + i, { budget: i, spent: j });
 
 		this.totalSpent = 0;
 
@@ -77,6 +124,67 @@ export class HistoryModalComponent {
 				this.totalSpent += this.trimmedBudget[i].spent[j].amount;
 			}
 		}
+	}
+
+	payDebt(id: number){
+
+		console.log(this.budget[id].debt);
+		console.log(this.budget[id].paidDebt);
+
+		let spent = 0;
+		for(let i = 0; i < this.budget[this._bp.getActiveBudget()].spent.length; i++){
+			spent += this.budget[this._bp.getActiveBudget()].spent[i].amount;
+		}
+		let amount = this.budget[this._bp.getActiveBudget()].amount - spent;
+
+		if(amount > 0){
+			let pay = amount;
+			if(amount > -this._bp.getDebt(id)){
+				pay = -this._bp.getDebt(id).toFixed(2);
+			}
+			let alert = this._ac.create({
+				title: 'Pay off $' + pay + ' in debt?',
+				message: 'This will use what\'s left of ' + this.convertDate(this.budget[this._bp.getActiveBudget()].date) + '\'s budget, so make sure you\'ve logged everything.',
+				buttons: [
+					{
+						text: 'Cancel',
+						role: 'cancel'
+					},
+					{
+						text: 'Pay',
+						handler: () => {
+							if(-this._bp.getDebt(id) < amount){ // amount available will pay
+								amount = amount - -this._bp.getDebt(id);
+								this.budget[this._bp.getActiveBudget()].amount = amount;
+								this._bp.addToDebtPaid(id, -this._bp.getDebt(id));
+								this._bp.setDebt(id, 0);
+								this._bp.setBudget(this.budget);
+								// console.log(this._bp.debtPaid);
+							} else { // amount available less than debt
+								this.budget[this._bp.getActiveBudget()].amount = 0;
+								this._bp.addToDebtPaid(id, amount);
+								this._bp.setDebt(id, this._bp.getDebt(id) + amount);
+								this._bp.setBudget(this.budget);
+								// console.log(this._bp.debtPaid);
+							}
+							
+							for(let i = 0; i < this.budget.length; i++){
+								this.events.publish('BudgetChanged' + i);
+							}
+						}
+					}
+				]
+			});
+			alert.present();
+		}
+	}
+
+	spent(id: number){
+		let spent = 0;
+		for(let i = 0; i < this.budget[id].spent.length; i++){
+			spent += this.budget[id].spent[i].amount;
+		}
+		return spent;
 	}
 
 }

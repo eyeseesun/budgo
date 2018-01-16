@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { BudgetProvider } from '../../providers/budget/budget';
 import { Budget } from '../../interfaces/budget.interface';
-import { Events } from 'ionic-angular';
+import { Events, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the BudgetComponent component.
@@ -34,8 +34,10 @@ export class BudgetComponent {
 	playing = false;
 	active: Array<boolean> = [true, false];
 	disabledAll: boolean = false;
+	debt: number = 0;
+	sumDebt: number = 0;
 
-	constructor(private _bp: BudgetProvider, private events: Events) {
+	constructor(private _bp: BudgetProvider, private events: Events, private _ac: AlertController) {
 		
 	}
 
@@ -83,8 +85,8 @@ export class BudgetComponent {
 		let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 
 		let todaysDate = (new Date(Date.now() - tzoffset)).toISOString();
-		// let todaysDateStr = Date.parse(todaysDate) + (5 * (1000*3600*24)); // To spoof the date
-		// todaysDate = new Date(todaysDateStr - tzoffset).toISOString();
+		let todaysDateStr = Date.parse(todaysDate) + (5 * (1000*3600*24)); // To spoof the date
+		todaysDate = new Date(todaysDateStr - tzoffset).toISOString();
 		todaysDate = todaysDate.substr(0, 11) + "00:00:00.000" + todaysDate.substr(23, todaysDate.length);
 
 		if(parseInt(this.day) < parseInt(todaysDate.substr(8, 2))){
@@ -102,6 +104,10 @@ export class BudgetComponent {
 		this.spendUpdate += this.spend;
 
 		this._bp.setBudget(this.budget);
+
+		if(this.amount < 0){
+			this._bp.setDebt(this.bID, this.budget[this.bID].amount - this.spendUpdate);
+		}
 
 
 		this.spend = 0;
