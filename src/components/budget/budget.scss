@@ -72,6 +72,10 @@ budget {
 		color: $green;
 	}
 
+	.pad {
+		padding: 5px 0px;
+	}
+
 	.inactive {
 		position: relative;
 		top: 4px;
@@ -137,6 +141,12 @@ budget {
 
 	.line {
 		border-bottom: 1px solid $green;
+		width: 100%;
+		margin: 0 auto;
+	}
+
+	.red-line {
+		border-bottom: 1px solid $red;
 		width: 100%;
 		margin: 0 auto;
 	}

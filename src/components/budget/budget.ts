@@ -32,7 +32,7 @@ export class BudgetComponent {
 	bankUpdate: number = 0;
 	timer;
 	playing = false;
-	active: Array<boolean> = [true, false];
+	active: Array<boolean> = [true, false, false];
 	disabledAll: boolean = false;
 	debt: number = 0;
 	sumDebt: number = 0;
