@@ -39,5 +39,5 @@
 		</div>
 		<br>
 	</div>
-	<button class="btn-style" (click)="submit()" [disabled]="m.value < 0 || m.value == 0 || m.value < daysBetween(startDate, endDate)">Ready to Save</button>
+	<budgo-button [id]="'submit'" [text]="'Ready to Save'" (click)="submit()" [disable]="m.value < 0 || m.value == 0 || m.value < daysBetween(startDate, endDate)">Ready to Save</budgo-button>
 </div>

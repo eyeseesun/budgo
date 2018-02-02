@@ -30,12 +30,10 @@ export class BudgetComponent {
 	placeholderTName: string = "Item or Service";
 	bank: number = 0;
 	bankUpdate: number = 0;
-	timer;
 	playing = false;
-	active: Array<boolean> = [true, false, false];
-	disabledAll: boolean = false;
-	debt: number = 0;
+	active: Array<boolean> = [true, false];
 	sumDebt: number = 0;
+	amountToPayIntoDebt: number = 0;
 
 	constructor(private _bp: BudgetProvider, private events: Events, private _ac: AlertController) {
 		
@@ -108,7 +106,6 @@ export class BudgetComponent {
 		if(this.amount < 0){
 			this._bp.setDebt(this.bID, this.budget[this.bID].amount - this.spendUpdate);
 		}
-
 
 		this.spend = 0;
 		this.transName = "";

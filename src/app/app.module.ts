@@ -6,6 +6,9 @@ import { NgFor, NgClass, NgIf, NgStyle } from '@angular/common';
 import { NgModel } from '@angular/forms';
 import 'intl';
 import 'intl/locale-data/jsonp/en';
+import * as $ from 'jquery';
+import TweenMax from 'gsap/TweenMax';
+import TimelineMax from 'gsap/TimelineMax';
 
 import { HomePage } from '../pages/home/home';
 import { NewBudgetPage } from '../pages/new-budget/new-budget';
@@ -22,6 +25,7 @@ import { BankModalComponent } from '../components/bank-modal/bank-modal';
 import { HistoryModalComponent } from '../components/history-modal/history-modal';
 import { NavFabComponent } from '../components/nav-fab/nav-fab';
 import { HomeBtnComponent } from '../components/home-btn/home-btn';
+import { BudgoButtonComponent } from '../components/budgo-button/budgo-button';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -46,7 +50,8 @@ import { IonicStorageModule } from '@ionic/storage';
     BankModalComponent,
     HistoryModalComponent,
     NavFabComponent,
-    HomeBtnComponent
+    HomeBtnComponent,
+    BudgoButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +75,8 @@ import { IonicStorageModule } from '@ionic/storage';
     BankModalComponent,
     HistoryModalComponent,
     NavFabComponent,
-    HomeBtnComponent
+    HomeBtnComponent,
+    BudgoButtonComponent
   ],
   providers: [
     StatusBar,

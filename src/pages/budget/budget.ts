@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, Events, AlertController } from 'ionic-angular';
 import { BudgetProvider } from '../../providers/budget/budget';
 import { Budget } from '../../interfaces/budget.interface';
 
@@ -25,13 +25,19 @@ export class BudgetPage {
 	};
 	currentView: number = 0;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private _bp: BudgetProvider, private events: Events) {
+	constructor(
+		public navCtrl: NavController, 
+		public navParams: NavParams, 
+		private _bp: BudgetProvider, 
+		private events: Events,
+		private _ac: AlertController) {
+
 		this.budget = _bp.getBudget();
 
 		let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 
 		let todaysDate = (new Date(Date.now() - tzoffset)).toISOString();
-		let todaysDateStr = Date.parse(todaysDate) + (5 * (1000*3600*24)); // To spoof the date
+		let todaysDateStr = Date.parse(todaysDate) + (6 * (1000*3600*24)); // To spoof the date
 		todaysDate = new Date(todaysDateStr - tzoffset).toISOString();
 		todaysDate = todaysDate.substr(0, 11) + "00:00:00.000" + todaysDate.substr(23, todaysDate.length);
 
@@ -42,6 +48,7 @@ export class BudgetPage {
 				this.trimmedBudget.push(this.budget[i]);
 			}
 		} else {
+			this.showCompletedBudgetPopup();
 			this.trimmedBudget = this.budget;
 		}
 		
@@ -68,6 +75,21 @@ export class BudgetPage {
 
 	daysBetween(date1String, date2String){
 	  return Math.floor((Date.parse(date2String)-Date.parse(date1String))/(1000*3600*24));
+	}
+
+	showCompletedBudgetPopup(){
+		let alert = this._ac.create({
+			title: "All Done!",
+			message: "You've completed your budget!",
+			buttons: [
+				{
+					text: 'Cool!',
+					role: 'cancel'
+				}
+			]
+		});
+
+		alert.present();
 	}
 
 }

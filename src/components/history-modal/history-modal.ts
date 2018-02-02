@@ -126,59 +126,6 @@ export class HistoryModalComponent {
 		}
 	}
 
-	payDebt(id: number){
-
-		console.log(this.budget[id].debt);
-		console.log(this.budget[id].paidDebt);
-
-		let spent = 0;
-		for(let i = 0; i < this.budget[this._bp.getActiveBudget()].spent.length; i++){
-			spent += this.budget[this._bp.getActiveBudget()].spent[i].amount;
-		}
-		let amount = this.budget[this._bp.getActiveBudget()].amount - spent;
-
-		if(amount > 0){
-			let pay = amount;
-			if(amount > -this._bp.getDebt(id)){
-				pay = -this._bp.getDebt(id).toFixed(2);
-			}
-			let alert = this._ac.create({
-				title: 'Pay off $' + pay + ' in debt?',
-				message: 'This will use what\'s left of ' + this.convertDate(this.budget[this._bp.getActiveBudget()].date) + '\'s budget, so make sure you\'ve logged everything.',
-				buttons: [
-					{
-						text: 'Cancel',
-						role: 'cancel'
-					},
-					{
-						text: 'Pay',
-						handler: () => {
-							if(-this._bp.getDebt(id) < amount){ // amount available will pay
-								amount = amount - -this._bp.getDebt(id);
-								this.budget[this._bp.getActiveBudget()].amount = amount;
-								this._bp.addToDebtPaid(id, -this._bp.getDebt(id));
-								this._bp.setDebt(id, 0);
-								this._bp.setBudget(this.budget);
-								// console.log(this._bp.debtPaid);
-							} else { // amount available less than debt
-								this.budget[this._bp.getActiveBudget()].amount = 0;
-								this._bp.addToDebtPaid(id, amount);
-								this._bp.setDebt(id, this._bp.getDebt(id) + amount);
-								this._bp.setBudget(this.budget);
-								// console.log(this._bp.debtPaid);
-							}
-							
-							for(let i = 0; i < this.budget.length; i++){
-								this.events.publish('BudgetChanged' + i);
-							}
-						}
-					}
-				]
-			});
-			alert.present();
-		}
-	}
-
 	spent(id: number){
 		let spent = 0;
 		for(let i = 0; i < this.budget[id].spent.length; i++){

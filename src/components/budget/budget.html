@@ -13,9 +13,8 @@
 		<div class="inline break">
 			<span class="z2" [ngClass]="{'inactive': !active[0], 'title': !active[0], 'title-inverse': active[0]}" (click)="activateTab(0)">Spend</span>
 			<span class="z2" [ngClass]="{'inactive': !active[1], 'title': !active[1], 'title-inverse': active[1]}" (click)="activateTab(1)">Bank</span>
-			<span class="z2" [ngClass]="{'inactive': !active[2], 'title': !active[2], 'title-inverse': active[2]}" (click)="activateTab(2)">Debt</span>
 		</div>
-		<div class="dailybudget-container z1">
+		<div class="box z1">
 			<div *ngIf="active[0]">
 				<span class="green small left-align">Transaction:</span>
 				<div class="line"></div>
@@ -28,7 +27,7 @@
 				</div>
 				<div class="row">
 					<div class="col">
-						<button class="btn-style" (click)="spendMoney()" [disabled]="n.value == '' || s.value < 0.01 || !s.value || s.value > 9999.99">Spend</button>
+						<budgo-button [id]="'spend'" [text]="'Spend'" (click)="spendMoney()" [disable]="n.value == '' || s.value < 0.01 || !s.value || s.value > 9999.99"></budgo-button>
 					</div>
 				</div>
 			</div>
@@ -38,20 +37,10 @@
 				<div class="inputs">
 					<ion-label stacked>Amount:</ion-label>
 					<input type="number" [(ngModel)]="bank" #b="ngModel">
+					<p class="red" *ngIf="b.value > amount">You can't bank more money than you have</p>
 				</div>				
-				<button class="btn-style" (click)="bankMoney()" [disabled]="b.value > amount">Bank</button>
-				<p class="red" *ngIf="b.value > amount">You can't bank more money than you have</p>
-			</div>
-			<div *ngIf="active[2]">
-				<span class="red small left-align">Debt:</span>
-				<div class="red-line"></div>
-				<p class="red med center pad">${{ -budget[bID].debt | number: '1.2-2'}}</p>
-				<span class="green small left-align">Bank:</span>
-				<div class="line"></div>
-				<p class="green med center pad">${{ _bp.getBanked() | number: '1.2-2' }}</p>
-				<ion-label stacked>Amount to pay:</ion-label>
-				<input type="number">
-				<button class="btn-style">Pay debt</button>
+				<budgo-button [id]="'bank'" [text]="'Bank'" (click)="bankMoney()" [disable]="b.value > amount"></budgo-button>
+				
 			</div>
 		</div>
 	</div>
