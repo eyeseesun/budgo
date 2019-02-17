@@ -1,4 +1,4 @@
-# Project Title
+# Budgo
 
 Budgo is a simple budgeting app. It asks for an amount of money to budget over a period of time, and every day gives you a random small amount of money to spend. You can keep track of your transactions through spending, and bank any money from one day to add to another.
 
