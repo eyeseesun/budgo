@@ -24,6 +24,7 @@ Add additional notes about how to deploy this on a live system
 
 - Design is super rewarding and I'd love to do it more in future projects.
 - Communication in Angular requires a bit of planning.
+**A year later**
 - I'm writing this awhile after I originally created Budgo. My code is quite thick and unreadable in places. If I were to do this again, I'd get the daily budget algorithm planned out and refine and refine and refine until I'm hitting at least 14 - 16 LOC for those heavy functions. Being concise is important, a function more than 12 lines is not that, but this was a learning project, so I'll try not to be too hard on myself.
 - Another thing I learned after the fact, clean your app.module.ts. This app tried to use GSAP, but for some reason couldn't get it to work and I never took out the dependency.
 - I love the file structure though. This is something Ionic 4 is moving away from, looking at angulars file structure. I don't like my services hanging out with my app module and component, just floating around in src.
